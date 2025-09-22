@@ -530,7 +530,7 @@ if __name__ == '__main__':
                     items.append((key, max(0, ms)))
                 # 稳定顺序：按 key 排序
                 items.sort(key=lambda x: x[0])
-                array['custom'] = ';'.join(f"{k}={v}" for k,v in items)
+                array['custom'] = ';'.join("{}={}".format(k, v) for k, v in items)
                 s.send(byte_str("update " + json.dumps(array) + "\n"))
         except KeyboardInterrupt:
             raise
