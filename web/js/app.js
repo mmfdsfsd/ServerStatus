@@ -163,6 +163,7 @@ function renderServers(){
   <td>${online?gaugeHTML('mem', memPct):'-'}</td>
   <td>${online?gaugeHTML('hdd', hddPct):'-'}</td>
   <td>${pingBuckets}</td>
+  <td>${(s.time_10010 != undefined ? s.time_10010 : '-')} | ${(s.time_189 != undefined ? s.time_189 : '-')} | ${(s.time_10086 != undefined ? s.time_10086 : '-')}</td>
     </tr>`;
   });
   tbody.innerHTML = html || `<tr><td colspan="13" class="muted" style="text-align:center;padding:1rem;">无数据</td></tr>`;
