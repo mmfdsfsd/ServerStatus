@@ -141,24 +141,24 @@ function renderServers(){
   const HEAVY_THRESHOLD = 500 * 1000 * 1000 * 1000; // 500GB
   const heavy = monthInBytes >= HEAVY_THRESHOLD || monthOutBytes >= HEAVY_THRESHOLD;
   const trafficCls = heavy ? 'caps-traffic duo heavy' : 'caps-traffic duo normal';
-    const netNow = humanMinKBFromB(s.network_rx) + ' | ' + humanMinKBFromB(s.network_tx); // 最小单位 KB
-    const netTotal = humanMinMBFromB(s.network_in)+' | '+humanMinMBFromB(s.network_out); // 最小单位 MB
+  const netNow = humanMinKBFromB(s.network_rx) + ' | ' + humanMinKBFromB(s.network_tx); // 最小单位 KB
+  const netTotal = humanMinMBFromB(s.network_in)+' | '+humanMinMBFromB(s.network_out); // 最小单位 MB
   const p1 = (s.ping_10010||0); const p2 = (s.ping_189||0); const p3 = (s.ping_10086||0);
   function bucket(p){ const v = Math.max(0, Math.min(100, p)); const level = v>=20?'bad':(v>=10?'warn':'ok'); return `<div class=\"bucket\" data-lv=\"${level}\"><span style=\"--h:${v}%\"></span><label>${v.toFixed(0)}%</label></div>`; }
   const pingBuckets = `<div class=\"buckets\" title=\"CU/CT/CM\">${bucket(p1)}${bucket(p2)}${bucket(p3)}</div>`;
   // 唯一 key 已附加为 s._key（如需使用）
   const rowCursor = online? 'pointer':'default';
-    const highLoad = online && ( (s.cpu||0)>=90 || (memPct)>=90 || (hddPct)>=90 );
+  const highLoad = online && ( (s.cpu||0)>=90 || (memPct)>=90 || (hddPct)>=90 );
   html += `<tr data-idx="${idx}" data-online="${online?1:0}" class="row-server${highLoad?' high-load':''}${osClass(s.os)}" style="cursor:${rowCursor};${online?'':'opacity:.65;'}">
   <td>${statusPill}</td>
   <td><span class="${trafficCls}" title="本月下行 | 上行 (≥500GB 触发红黄)"><span class="half in">${monthIn}</span><span class="half out">${monthOut}</span></span></td>
-      <td>${s.name||'-'}</td>
-      <td>${s.type||'-'}</td>
-      <td>${s.location||'-'}</td>
-      <td>${s.uptime||'-'}</td>
+  <td>${s.name||'-'}</td>
+  <td>${s.type||'-'}</td>
+  <td>${s.location||'-'}</td>
+  <td>${s.uptime||'-'}</td>
   <td>${s.load_1==-1?'–':Math.max(0,(s.load_1||0)).toFixed(2)}</td>
-      <td>${netNow}</td>
-      <td>${netTotal}</td>
+  <td>${netNow}</td>
+  <td>${netTotal}</td>
   <td>${online?gaugeHTML('cpu', s.cpu||0):'-'}</td>
   <td>${online?gaugeHTML('mem', memPct):'-'}</td>
   <td>${online?gaugeHTML('hdd', hddPct):'-'}</td>
